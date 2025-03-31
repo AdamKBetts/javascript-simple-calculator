@@ -95,6 +95,26 @@ function calculateResult() {
     updateDisplay();
 }
 
+function handleKeyboardInput(event) {
+    const key = event.key;
+
+    if (key >= '0' && key <= '9') {
+        handleNumberClick(key);
+    } else if (key === '.') {
+        handleDecimalClick();
+    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        handleOperatorClick(key);
+    } else if (key === 'Enter' || key === '=') {
+        handleEqualClick();
+    } else if (key === 'Escape' || key === 'AC' || key === 'Backspace' || key === 'Delete') {
+        clearCalculator();
+    } else if (key === '%') {
+        handlePercentage();
+    } else if (key === '_') {
+        handlePlusMinus();
+    }
+}
+
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const buttonValue = button.textContent;
@@ -115,6 +135,8 @@ buttons.forEach(button => {
         }
     });
 });
+
+document.addEventListener('keydown', handleKeyboardInput);
 
 // Initial display update
 updateDisplay();
