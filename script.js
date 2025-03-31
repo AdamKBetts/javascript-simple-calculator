@@ -97,7 +97,35 @@ function calculateResult() {
 
 function handleKeyboardInput(event) {
     const key = event.key;
+    let buttonToActivate = null;
 
+    buttons.forEach(button => {
+        const buttonValue = button.textContent;
+        if (
+            (key >= '0' && key <= '9' && key === buttonValue) ||
+            (key === '.' && buttonValue === '.') ||
+            (key === '+' && buttonValue === '+') ||
+            (key === '-' && buttonValue === '-') ||
+            (key === '*' && buttonValue === '*') ||
+            (key === '/' && buttonValue === '/') ||
+            ((key === 'Enter' || key === '=') && buttonValue === '=') ||
+            ((key === 'Escape' || key === 'AC') && buttonValue === 'AC') ||
+            (key === '%' && buttonValue === '%') ||
+            (key === '_' && buttonValue === '+/-') ||
+            ((key === 'Backspace' || key === 'Delete') && buttonValue === 'AC')
+        ) {
+            buttonToActivate = button;
+        }
+    });
+
+    if (buttonToActivate) {
+        buttonToActivate.classList.add('active');
+        setTimeout(() => {
+            buttonToActivate.classList.remove('active');
+        }, 100);
+    }
+
+    // Call the appropriate handler function
     if (key >= '0' && key <= '9') {
         handleNumberClick(key);
     } else if (key === '.') {
@@ -107,7 +135,7 @@ function handleKeyboardInput(event) {
     } else if (key === 'Enter' || key === '=') {
         handleEqualClick();
     } else if (key === 'Escape' || key === 'AC' || key === 'Backspace' || key === 'Delete') {
-        clearCalculator();
+        handleClearEntry();
     } else if (key === '%') {
         handlePercentage();
     } else if (key === '_') {
@@ -118,6 +146,10 @@ function handleKeyboardInput(event) {
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const buttonValue = button.textContent;
+
+        // Add the active class
+        button.classList.add('active');
+
         if (buttonValue >= '0' && buttonValue <= '9') {
             handleNumberClick(buttonValue);
         } else if (buttonValue === '.') {
@@ -133,6 +165,11 @@ buttons.forEach(button => {
         } else if (buttonValue === '%') {
             handlePercentage();
         }
+
+        // Remove the active class after a short delay (e.g. 100 milliseconds)
+        setTimeout(() => {
+            button.classList.remove('active');
+        }, 100);
     });
 });
 

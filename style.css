@@ -69,3 +69,16 @@ button:hover {
 .equal:hover {
     background-color: #66bb6a;
 }
+
+button.active {
+    background-color: #666;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.operator.active {
+    background-color: #ffb347;
+}
+
+.equal.active {
+    background-color: #66bb6a;
+}
