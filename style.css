@@ -34,6 +34,17 @@ body {
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto auto auto; /* Adjust rows as needed */
+    gap: 8px;
+    padding: 10px;
+    grid-template-areas:
+        "mc mr mplus mminus"
+        "ac ce sqrt inverse"
+        "seven eight nine divide"
+        "four five six multiply"
+        "one two three subtract"
+        "plusminus zero decimal add"
+        "equal equal equal add"; /* To make equals span two rows and be on the right */
 }
 
 button {
@@ -61,11 +72,14 @@ button:hover {
 }
 
 .zero {
-    grid-column: span 1;
+    grid-area: zero;
+    grid-column: span 2; /* Make zero span two columns */
 }
 
 .equal {
+    grid-area: equal;
     background-color: #4CAF50;
+    grid-row: span 2; /* Make equals span two rows */
 }
 
 .equal:hover {
