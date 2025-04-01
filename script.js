@@ -1,6 +1,32 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.buttons button');
 
+const keyboardMap = {
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4',
+    '5': '5',
+    '6': '6',
+    '7': '7',
+    '8': '8',
+    '9': '9',
+    '.': '.',
+    '+': '+',
+    '-': '-',
+    '*': '*',
+    '/': '/',
+    'Enter': '=',
+    '=': '=',
+    'Escape': 'AC',
+    'AC': 'AC', // In case someone types AC
+    '%': '%',
+    '_': '+/-',
+    'Backspace': 'AC', // Treat backspace as clear for this simple calculator
+    'Delete': 'AC'    // Treat delete as clear as well
+}
+
 let currentInput = '';
 let operator = null;
 let firstOperand = null;
@@ -108,44 +134,34 @@ function calculateResult() {
 
 function handleKeyboardInput(event) {
     const key = event.key;
+    const buttonValue = keyboardMap[key];
     let buttonToActivate = null;
 
-    buttons.forEach(button => {
-        const buttonValue = button.textContent;
-        if (
-            (key >= '0' && key <= '9' && key === buttonValue) ||
-            (key === '.' && buttonValue === '.') ||
-            (key === '+' && buttonValue === '+') ||
-            (key === '-' && buttonValue === '-') ||
-            (key === '*' && buttonValue === '*') ||
-            (key === '/' && buttonValue === '/') ||
-            ((key === 'Enter' || key === '=') && buttonValue === '=') ||
-            ((key === 'Escape' || key === 'AC') && buttonValue === 'AC') ||
-            (key === '%' && buttonValue === '%') ||
-            (key === '_' && buttonValue === '+/-') ||
-            ((key === 'Backspace' || key === 'Delete') && buttonValue === 'AC')
-        ) {
-            buttonToActivate = button;
+    if (buttonValue) {
+        buttons.forEach(button => {
+            if (button.textContent === buttonValue) {
+                buttonToActivate = button;
+            }
+        });
+
+        toggleActiveButton(buttonToActivate);
+
+        // Call the appropriate handler function
+        if (key >= '0' && key <= '9') {
+            handleNumberClick(key);
+        } else if (key === '.') {
+            handleDecimalClick();
+        } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+            handleOperatorClick(key);
+        } else if (key === 'Enter' || key === '=') {
+            handleEqualClick();
+        } else if (key === 'Escape' || key === 'AC' || key === 'Backspace' || key === 'Delete') {
+            handleClearEntry();
+        } else if (key === '%') {
+            handlePercentage();
+        } else if (key === '_') {
+            handlePlusMinus();
         }
-    });
-
-    toggleActiveButton(buttonToActivate);
-
-    // Call the appropriate handler function
-    if (key >= '0' && key <= '9') {
-        handleNumberClick(key);
-    } else if (key === '.') {
-        handleDecimalClick();
-    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-        handleOperatorClick(key);
-    } else if (key === 'Enter' || key === '=') {
-        handleEqualClick();
-    } else if (key === 'Escape' || key === 'AC' || key === 'Backspace' || key === 'Delete') {
-        handleClearEntry();
-    } else if (key === '%') {
-        handlePercentage();
-    } else if (key === '_') {
-        handlePlusMinus();
     }
 }
 
