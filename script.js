@@ -178,6 +178,8 @@ buttons.forEach(button => {
             handleDecimalClick();
         } else if (buttonValue === 'AC') {
             clearCalculator();
+        } else if (buttonValue === 'CE'){
+            handleClearEntry();
         } else if (buttonValue === '=') {
             handleEqualClick();
         } else if (['+', '-', '*', '/'].includes(buttonValue)) {
