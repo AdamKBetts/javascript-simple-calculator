@@ -16,6 +16,15 @@ function clearCalculator() {
     updateDisplay();
 }
 
+function toggleActiveButton(buttonElement) {
+    if (buttonElement) {
+        buttonElement.classList.add('active');
+        setTimeout(() => {
+            buttonElement.classList.remove('active');
+        }, 100);
+    }
+}
+
 function handleNumberClick(number) {
     if (currentInput === '0' && number === '0') {
         return;
@@ -120,12 +129,7 @@ function handleKeyboardInput(event) {
         }
     });
 
-    if (buttonToActivate) {
-        buttonToActivate.classList.add('active');
-        setTimeout(() => {
-            buttonToActivate.classList.remove('active');
-        }, 100);
-    }
+    toggleActiveButton(buttonToActivate);
 
     // Call the appropriate handler function
     if (key >= '0' && key <= '9') {
@@ -150,7 +154,7 @@ buttons.forEach(button => {
         const buttonValue = button.textContent;
 
         // Add the active class
-        button.classList.add('active');
+        toggleActiveButton(button);
 
         if (buttonValue >= '0' && buttonValue <= '9') {
             handleNumberClick(buttonValue);
@@ -167,11 +171,6 @@ buttons.forEach(button => {
         } else if (buttonValue === '%') {
             handlePercentage();
         }
-
-        // Remove the active class after a short delay (e.g. 100 milliseconds)
-        setTimeout(() => {
-            button.classList.remove('active');
-        }, 100);
     });
 });
 
