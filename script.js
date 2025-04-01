@@ -156,6 +156,11 @@ function calculateResult() {
             default:
                 return;
         }
+
+        if (typeof result === 'number') {
+            result = parseFloat(result.toFixed(6));
+        }
+
         const resultString = result.toString();
         if (resultString.length > DISPLAY_LIMIT) {
             currentInput = 'Error';
