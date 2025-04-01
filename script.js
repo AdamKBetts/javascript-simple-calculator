@@ -1,5 +1,6 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('.buttons button');
+const DISPLAY_LIMIT = 12;
 
 const keyboardMap = {
     '0': '0',
@@ -23,8 +24,8 @@ const keyboardMap = {
     'AC': 'AC', // In case someone types AC
     '%': '%',
     '_': '+/-',
-    'Backspace': 'AC', // Treat backspace as clear for this simple calculator
-    'Delete': 'AC'    // Treat delete as clear as well
+    'Backspace': 'CE', // Treat backspace as clear for this simple calculator
+    'Delete': 'CE'    // Treat delete as clear as well
 }
 
 let currentInput = '';
@@ -56,7 +57,7 @@ function handleNumberClick(number) {
         return;
     } else if (currentInput === '0' && number !== '.') {
         currentInput = number;
-    } else {
+    } else if (currentInput.length < DISPLAY_LIMIT) {
         currentInput += number;
     }
     updateDisplay();
@@ -100,16 +101,28 @@ function handlePlusMinus() {
 
 function handlePercentage() {
     if (currentInput) {
-        currentInput = (parseFloat(currentInput) / 100).toString();
-        updateDisplay();
+        const newValue = (parseFloat(currentInput) * -1).toString();
+        if (newValue.length <= DISPLAY_LIMIT) {
+            currentInput = newValue;
+            updateDisplay();
+        } else {
+            currentInput = 'Error';
+            updateDisplay();
+        }
     }
 }
 
 function handleSquareRoot() {
     const currentValue = parseFloat(currentInput);
     if (!isNaN(currentValue) && currentValue >= 0) {
-        currentInput = Math.sqrt(currentValue).toString();
-        updateDisplay();
+        const result = Math.sqrt(currentValue).toString();
+        if (result.length <= DISPLAY_LIMIT) {
+            currentInput = result;
+            updateDisplay();
+        } else {
+            currentInput = 'Error';
+            updateDisplay();
+        }
     } else if (currentValue < 0) {
         currentInput = 'Error';
         updateDisplay();
@@ -122,28 +135,35 @@ function handleSquareRoot() {
 function calculateResult() {
     let result;
     const secondOperand = parseFloat(currentInput);
-    switch (operator) {
-        case '+':
-            result = firstOperand + secondOperand;
-            break;
-        case '-':
-            result = firstOperand - secondOperand;
-            break;
-        case '*':
-            result = firstOperand * secondOperand;
-            break;
-        case '/':
-            if (secondOperand === 0) {
-                result = 'Error';
-            } else {
-                result = firstOperand / secondOperand;
-            }
-            break;
-        default:
-            return;
+    if (operator) { // Add this check
+        switch (operator) {
+            case '+':
+                result = firstOperand + secondOperand;
+                break;
+            case '-':
+                result = firstOperand - secondOperand;
+                break;
+            case '*':
+                result = firstOperand * secondOperand;
+                break;
+            case '/':
+                if (secondOperand === 0) {
+                    result = 'Error';
+                } else {
+                    result = firstOperand / secondOperand;
+                }
+                break;
+            default:
+                return;
+        }
+        const resultString = result.toString();
+        if (resultString.length > DISPLAY_LIMIT) {
+            currentInput = 'Error';
+        } else {
+            currentInput = resultString;
+        }
+        updateDisplay();
     }
-    currentInput = result.toString();
-    updateDisplay();
 }
 
 function handleKeyboardInput(event) {
