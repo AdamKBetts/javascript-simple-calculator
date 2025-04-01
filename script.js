@@ -31,6 +31,7 @@ const keyboardMap = {
 let currentInput = '';
 let operator = null;
 let firstOperand = null;
+let memoryValue = 0;
 
 function updateDisplay() {
     display.value = currentInput;
@@ -132,6 +133,29 @@ function handleSquareRoot() {
     }
 }
 
+function handleMemoryClear() {
+    memoryValue = 0;
+}
+
+function handleMemoryRecall() {
+    currentInput = memoryValue.toString();
+    updateDisplay();
+}
+
+function handleMemoryAdd() {
+    const currentValue = parseFloat(currentInput);
+    if (!isNaN(currentValue)) {
+        memoryValue += currentValue;
+    }
+}
+
+function handleMemorySubtract() {
+    const currentValue = parseFloat(currentInput);
+    if (!isNaN(currentValue)) {
+        memoryValue -= currentValue;
+    }
+}
+
 function calculateResult() {
     let result;
     const secondOperand = parseFloat(currentInput);
@@ -229,6 +253,14 @@ buttons.forEach(button => {
             handlePercentage();
         } else if (buttonValue === '√') {
             handleSquareRoot();
+        } else if (buttonValue === 'MC') {
+            handleMemoryClear();
+        } else if (buttonValue === 'MR') {
+            handleMemoryRecall();
+        } else if (buttonValue === 'M+') {
+            handleMemoryAdd();
+        } else if (buttonValue === 'M-') {
+            handleMemorySubtract();
         }
     });
 });
