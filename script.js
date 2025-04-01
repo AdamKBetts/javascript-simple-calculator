@@ -156,6 +156,27 @@ function handleMemorySubtract() {
     }
 }
 
+function handleInverse() {
+    console.log('handleInverse function called!');
+    const currentValue = parseFloat(currentInput);
+    if (!isNaN(currentValue)) {
+        if (currentValue === 0) {
+            currentInput = 'Error';
+        } else {
+            const result = (1 / currentValue).toString();
+            if (result.length <= DISPLAY_LIMIT) {
+                currentInput = result;
+            } else {
+                currentInput = 'Error';
+            }
+        }
+        updateDisplay();
+    } else {
+        currentInput = 'Error';
+        updateDisplay();
+    }
+}
+
 function calculateResult() {
     let result;
     const secondOperand = parseFloat(currentInput);
@@ -232,14 +253,9 @@ buttons.forEach(button => {
     button.addEventListener('click', () => {
         const buttonValue = button.textContent;
 
-        // Add the active class
         toggleActiveButton(button);
 
-        if (buttonValue >= '0' && buttonValue <= '9') {
-            handleNumberClick(buttonValue);
-        } else if (buttonValue === '.') {
-            handleDecimalClick();
-        } else if (buttonValue === 'AC') {
+        if (buttonValue === 'AC') {
             clearCalculator();
         } else if (buttonValue === 'CE'){
             handleClearEntry();
@@ -253,6 +269,8 @@ buttons.forEach(button => {
             handlePercentage();
         } else if (buttonValue === '√') {
             handleSquareRoot();
+        } else if (buttonValue === '1/x') { // Move this up
+            handleInverse();
         } else if (buttonValue === 'MC') {
             handleMemoryClear();
         } else if (buttonValue === 'MR') {
@@ -261,6 +279,10 @@ buttons.forEach(button => {
             handleMemoryAdd();
         } else if (buttonValue === 'M-') {
             handleMemorySubtract();
+        } else if (buttonValue >= '0' && buttonValue <= '9') { // Keep this at the end
+            handleNumberClick(buttonValue);
+        } else if (buttonValue === '.') { // Keep this after numbers
+            handleDecimalClick();
         }
     });
 });
