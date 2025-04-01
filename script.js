@@ -105,6 +105,20 @@ function handlePercentage() {
     }
 }
 
+function handleSquareRoot() {
+    const currentValue = parseFloat(currentInput);
+    if (!isNaN(currentValue) && currentValue >= 0) {
+        currentInput = Math.sqrt(currentValue).toString();
+        updateDisplay();
+    } else if (currentValue < 0) {
+        currentInput = 'Error';
+        updateDisplay();
+    } else {
+        currentInput = 'Error';
+        updateDisplay();
+    }
+}
+
 function calculateResult() {
     let result;
     const secondOperand = parseFloat(currentInput);
@@ -188,6 +202,8 @@ buttons.forEach(button => {
             handlePlusMinus();
         } else if (buttonValue === '%') {
             handlePercentage();
+        } else if (buttonValue === '√') {
+            handleSquareRoot();
         }
     });
 });
