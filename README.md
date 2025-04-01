@@ -1,56 +1,48 @@
-# Simple JavaScript Calculator
+# Simple Calculator
 
-## Description
+This is a basic calculator built using HTML, CSS, and JavaScript. It provides fundamental arithmetic operations and some additional features.
 
-This project is a simple calculator built using HTML, CSS, and JavaScript. It provides basic arithmetic operations such as addition, subtraction, multiplication, and division. This project was created as a portfolio piece to demonstrate fundamental web development skills, including DOM manipulation and event handling in JavaScript.
+## Features Implemented
 
-## Key Features
-
-- **Basic Arithmetic Operations:** Performs addition (+), subtraction (-), multiplication (\*), and division (/).
-- **Clear Functionality (AC):** Clears the display and resets the calculator.
-- **Decimal Input:** Allows for decimal numbers.
-- **Positive/Negative Toggle (+/-):** Changes the sign of the current number.
-- **Percentage Calculation (%):** Calculates the percentage of the current number.
-- **Error Handling:** Basic error handling for division by zero.
-- **User-Friendly Interface:** Clean and intuitive design.
+- **Basic Arithmetic Operations:** Addition (+), Subtraction (-), Multiplication (\*), Division (/)
+- **Clear Functions:**
+  - **AC (All Clear):** Clears the entire calculation.
+  - **CE (Clear Entry):** Clears the current input.
+- **Decimal Input:** Allows for calculations with decimal numbers.
+- **Equals Button (=):** Calculates and displays the result.
+- **Plus/Minus (+/-):** Changes the sign of the current input.
+- **Percentage (%):** Calculates the percentage of the current input (note: this implementation might differ from advanced calculators).
+- **Square Root (√):** Calculates the square root of the current input.
+- **Display Limit:** Limits the number of digits displayed to prevent overflow.
+- **Rounding of Results:** Rounds the result of calculations to a maximum of 6 decimal places.
+- **Memory Functions:**
+  - **MC (Memory Clear):** Clears the stored memory value.
+  - **MR (Memory Recall):** Recalls the value stored in memory and displays it.
+  - **M+ (Memory Add):** Adds the current input to the value in memory.
+  - **M- (Memory Subtract):** Subtracts the current input from the value in memory.
+- **Inverse (1/x):** Calculates the reciprocal of the current input.
+- **Keyboard Input:** Allows users to interact with the calculator using their keyboard.
+- **Improved Button Layout:** Uses CSS Grid for a more organized and user-friendly button arrangement.
 
 ## How to Use
 
-1.  **Clone the Repository:** If you haven't already, clone this repository to your local machine using Git:
+1.  **Clone or Download:** If you have the project in a repository, clone it to your local machine. Otherwise, download the project files.
+2.  **Open `index.html`:** Navigate to the project directory and open the `index.html` file in your web browser.
+3.  **Perform Calculations:** Use the buttons on the calculator (or your keyboard) to enter numbers and perform operations. The result will be displayed in the input field at the top.
 
-    ```bash
-    git clone <repository-url>
-    ```
+## Files Included
 
-    _(Replace `<repository-url>` with the actual URL of the GitHub repository)_
+- `index.html`: The main HTML file that structures the calculator's layout.
+- `style.css`: The CSS file that styles the appearance of the calculator.
+- `script.js`: The JavaScript file that contains the logic and functionality of the calculator.
 
-2.  **Open `index.html`:** Navigate to the project directory in your file explorer and open the `index.html` file in your web browser.
+## Potential Future Enhancements
 
-3.  **Use the Calculator:** You can now interact with the calculator by clicking the buttons on the screen.
+- Implementing order of operations (PEMDAS/BODMAS).
+- Adding more advanced mathematical functions (trigonometric, exponential, etc.).
+- Improving the visual design and user interface.
+- Adding more robust error handling.
+- Implementing unit tests to ensure functionality.
+- Deploying the calculator online.
 
-## Technologies Used
-
-- **HTML:** For structuring the calculator's interface.
-- **CSS:** For styling the calculator and making it visually appealing.
-- **JavaScript:** For implementing the calculator's logic and functionality.
-
-## Potential Enhancements
-
-Here are some ideas for future improvements and additions to the calculator:
-
-- **Keyboard Input:** Allow users to input numbers and operators using their keyboard.
-- **Memory Functions:** Implement memory functions like M+, M-, MR, and MC.
-- **Advanced Operations:** Add more advanced mathematical operations such as square root, exponents, etc.
-- **More Robust Error Handling:** Implement more comprehensive error handling for various scenarios.
-- **Improved Styling:** Further enhance the visual design and user experience.
-- **Unit Testing:** Write unit tests for the JavaScript functions to ensure code reliability.
-
-## Author
-
-Adam - https://github.com/AdamKBetts
-
-_This project was created as part of a career change journey into software development._
-
-## License
-
-This project is open source and available. You are free to use, modify, and distribute it as per the terms of the license.
+---
