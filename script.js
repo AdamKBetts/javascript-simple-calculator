@@ -17,7 +17,9 @@ function clearCalculator() {
 }
 
 function handleNumberClick(number) {
-    if (currentInput === '0') {
+    if (currentInput === '0' && number === '0') {
+        return;
+    } else if (currentInput === '0' && number !== '.') {
         currentInput = number;
     } else {
         currentInput += number;
